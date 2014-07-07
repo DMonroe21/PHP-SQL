@@ -1,0 +1,48 @@
+
+<?php
+include_once(init.php);
+
+if (isset($_POST['name']))
+{
+	$name = trim($_POST['name']);
+}
+if( empty($name))
+{
+   $error='You must submit Category name';
+}
+else if (category_exists($name))
+{
+     $error= 'category exists.';
+} 
+else if (strlen($name)>24)
+{
+  $error= 'Category name less than 24.';
+}
+ if (! isset($error))
+ {
+    add_category($name);
+}
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Add a category</title>
+</head>
+
+<body>
+	<h1> Add a category</h1>
+
+
+        <form action='category_list.php' method='post'>
+            <div>
+                <label for='name'> Name</label>
+                <input type='text' name='name' >
+            </div>
+            <div>
+                 <input type='submit' value='Add Category'>
+            </div>
+        </form>             
+
+  </body>
+
+</html>
