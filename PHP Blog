@@ -1,0 +1,76 @@
+<?php
+
+require ("db.php"); // establish a connection to the database
+include ("start.html"); 
+
+$content = ""; // start empty
+$page = strip_tags($_GET['p']); // sanitize data.
+
+// set it so that if page is empty (IE, home page) show archive posts.
+if (empty($page)) {
+    $page = "archive";
+}
+
+if ($page == 'add') {
+    // display the add form..
+    if (empty($_POST['submit'])) {
+        $content .= "
+        <form action=\"{$_SERVER['PHP_SELF']}?p=add\" method=\"post\" align=\"center\" >
+        <label for=\"title\"><b>Title:<b></label> <input type=\"text\" name=\"title\" id=\"title\" /><br /><br />
+        <label for=\"content\"></label><br /><br /><textarea name=\"content\" id=\"content\" rows=\"15\" columns=\"15\" size=\"400\"></textarea><br />
+        <input type=\"submit\" name=\"submit\" id=\"submit\" value=\"Post\" />
+        </form>
+        ";
+    } else {
+        // sanitization is important. You could catch some nasty bug.
+        $title = mysql_real_escape_string(htmlspecialchars($_POST['title'], ENT_QUOTES));
+        $entry = mysql_real_escape_string(htmlspecialchars($_POST['content'], ENT_QUOTES));
+        // re enable line breaks.
+        $entry = str_replace(array("\\r\\n", "\\r", "\\n"), "<br />", $entry);
+        // if the title or content is empty, tell the user it's empty!!
+        if ((!empty($title)) && (!empty($entry))) {
+                    mysql_query("INSERT INTO `blog` (`id` ,`title` ,`content` ,`datetime` ,`userip`)VALUES (NULL ,  '{$title}',  '{$entry}',  NOW(),  '{$_SERVER['REMOTE_ADDR']}');");
+                    $content .= "Entry Added!";
+        } else {
+            $content .= "Error. Please fill out all fields.";
+        }
+
+    }
+
+
+} else
+    if ($page == 'archive') {
+        // Loop through the archive
+        $getpostsq = mysql_query("SELECT * FROM `blog` ORDER BY `blog`.`datetime` DESC LIMIT 5");
+        while ($getposts = mysql_fetch_assoc($getpostsq)) {
+            $content .= "<div class=\"archive\">
+    <p><em>{$getposts['datetime']}</em> &raquo; <a href=\"home.php?p={$getposts['id']}\"><strong>{$getposts['title']}</strong></a></p></div>";
+        }
+    } else
+        if ((int)$page) {
+            $getpostq = mysql_query("SELECT * FROM `blog` WHERE `id` = '$page'"); // select
+            $getpost = mysql_fetch_assoc($getpostq);
+            $content .= "<h1>{$getpost['title']}</h1>
+    <em class=\"right\">{$getpost['datetime']}</em>
+    <blockquote>{$getpost['content']}</blockquote>";
+        } else {
+            $content .= "Error, unknown action.";
+        }
+
+        echo $content; // echo out the pre filled content variable.
+
+?>
+
+<html>
+<head>
+	<title>Project 2</title>
+	<link href="final.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body>
+	<div id="page" class="container">
+		<div id="content">
+		</div>
+	</div>
+</body>
+</html>
