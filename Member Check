@@ -1,0 +1,55 @@
+<?php
+	session_start();
+	
+	$host = "localhost";
+	$username = "dmonroe4";
+	$password = "1db23";
+	$db_name = "dmonroe4";
+	$tbl_name = "members";
+	
+	mysql_connect("$host", "$username", "$password") or die ("cannot connect");
+	mysql_select_db("$db_name") or die ("cannot select $db_name");
+	
+	$memusername = $_POST['username'];
+	$mempassword = $_POST['password'];
+	
+	$memusername = stripslashes($memusername);
+	$mempassword = stripslashes($mempassword);
+	$memusername = mysql_real_escape_string($memusername);
+	$mempassword = mysql_real_escape_string($mempassword);
+
+	$expire = time()+3600;
+	setcookie("$memusername", $expire);
+	
+	$sql = "SELECT * FROM $tbl_name WHERE username = '$memusername' AND password = '$mempassword'";
+	$result = mysql_query($sql);
+
+	//count number of rows and after member login, they are placed in row 1
+	$count = mysql_num_rows($result);
+	
+	if($count==1)
+	{
+		$_SESSION['username']=$memusername;
+		$_SESSION['password']=$mempassword; 
+		header("location:welcome.php");
+	}
+	else
+	{
+		?> 
+		   <script type = "text/javascript">;
+		   alert("Wrong username or password, try again.");
+		   history.back();
+		   </script>;
+		<?php
+	}
+	
+	mysql_close();
+?>
+
+<html>
+
+<head>
+	<title>Project 2</title>
+</head>
+
+</html>
