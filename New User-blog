@@ -1,0 +1,77 @@
+<?php
+	session_start();
+	
+	$host = "localhost";
+	$username = "dmonroe4";
+	$password = "1db23";
+	$db_name = "dmonroe4";
+	$tbl_name = "members";
+	
+	//error storage
+	$errmsg_arr[] = array();
+	$errflag = false;
+	
+	mysql_connect("$host", "$username", "$password") or die ("cannot connect");
+	mysql_select_db("$db_name") or die ("cannot select $db_name");
+	
+	$newuser = $_POST['newusername'];
+	$newpass = $_POST['newpassword'];
+	$conpass = $_POST['confirmpassword'];
+	
+	$expire = time()+3600;
+	setcookie("$memusername", $expire);
+	
+	if($newuser=='')
+	{
+		$errmsg_arr[] = 'Username left blank';
+		$errflag = true;
+	}
+	if($newpass=='')
+	{
+		$errmsg_arr[] = 'Password left blank';
+		$errflag = true;
+	}
+	if(strcmp($newpass, $conpass)!=0 )
+	{
+		$errmsg_arr[] = 'Passwords do not match';
+		$errflag = true;
+	}
+	
+	if($newuser!='')
+	{
+		$sql = "SELECT * FROM $tbl_name WHERE username = '$nweuser'";
+		$result = mysql_query($sql);
+		if($result)
+		{
+			if(mysql_num_rows($result)>0)
+			{
+				$errmsg_arr[] = 'Username already in use';
+				$errflag = true;
+			}
+			@mysql_free_result($result);
+		}
+	}
+	
+	if($errflag)
+	{
+		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+		header("location:newUser.php");
+		exit();
+	}
+	
+	$sql = "INSERT INTO members(username, password) VALUES('$newuser', '$newpass')";
+	$result = @mysql_query($sql);
+	
+	if($result)
+	{
+		header("location:memberLogin.php");
+		exit();
+	}
+	mysql_close();
+?>
+
+<html>
+
+<head>
+	<title>Project 2</title>
+</head>
