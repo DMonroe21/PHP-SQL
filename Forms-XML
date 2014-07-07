@@ -1,0 +1,144 @@
+<?xml version = "1.0"?>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+<title>DeAndrea Monroe</title>
+<script type = "text/javascript" src = "checkval.js"></script>
+<style rel = "stylesheet" type="text/css">
+
+a:link
+{
+color: #ff0000;
+font-size: 14px;
+font-family: Verdana;
+font-weight: bold;
+}
+
+a:link:hover, a:visited:hover
+{
+color: #4d4d4d;
+background: #d1d1d1;
+}
+
+a:visited
+{
+font-family: Verdana;
+font-size: 14px;
+color: #c00000;
+}
+
+a:active
+{
+color: #ff7f00;
+}
+</style>
+</head>
+
+<body>	 
+<h1>Assignment 1</h1>
+<p>
+<br />
+<br />
+<br />
+</p>
+
+<form id="myform" action="http://codd.cs.gsu.edu/~cfrederick1/submit2.php" method="get">
+<table border="0">
+<tr>
+<th>What is your favorite food?</th>
+</tr>
+	<tr>
+		<td>
+		<input type="checkbox" name="box1" onClick="boxCount(this)" value="pizza" />Pizza
+		</td>
+		<td></td>
+		<td>
+		<input type="checkbox" name="box2" onClick="boxCount(this)" value="fries" checked="checked" />French Fries
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<input type="checkbox" name="box3" onClick="boxCount(this)" value="burgers" />Hamburgers
+		</td>
+		<td></td>
+		<td>
+		<input type="checkbox" name="box4" onClick="boxCount(this)" value="fish" />Fish
+		</td>
+	</tr>
+</table>
+<p>
+<br />
+<br />
+<br />
+</p>
+<table border="0">
+<tr>
+<th>What is your favorite sport?</th>
+</tr>
+	<tr>
+		<td>
+		<input type="radio" name="radio1" value="basketball" checked="checked" />Basketball
+		</td>
+		<td>
+		<input type="radio" name="radio1" value="baseball" />Baseball
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<input type="radio" name="radio1" value="football" />Football
+		</td>
+		<td>
+		<input type="radio" name="radio1" value="soccer" />Soccer
+		</td>
+	</tr>
+</table>
+<p>
+<br />
+<br />
+<br />
+</p>
+<table border="0">
+<tr>
+<th>What is your favorite color?</th>
+</tr>
+	<tr>
+		<td>
+			<select name="select1">
+				<option selected="selected">Please select</option>
+				<option>Red</option>
+				<option>Blue</option>
+				<option>Green</option>
+				<option>Yellow</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<p>
+<br />
+<br />
+<label>
+	<b>Username</b><input type="text" id="username" />
+</label>
+<br /><br />
+<label>
+	<b>Password</b><input type="password" id="password" />
+</label>
+<br /><br /><br />
+<input type="reset" id="reset" />
+<input type="submit" id="submit" />
+</p>
+</form>
+<script type="text/javascript" src="checkvalreg.js"></script>
+
+<p>
+<br />
+<br />
+<br />
+<a href="loginform-java.html">Link to Login Form</a>
+</p>
+
+</body>
+</html>
