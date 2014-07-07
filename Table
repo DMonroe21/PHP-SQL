@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<head>
+	<title>DeAndrea Monroe</title>
+</head>
+
+<body>
+	<form action = "http://codd.cs.gsu.edu/~dmonroe4/ptable.php" method="post">
+	<h1 align= "center" >Let's make a table!</h1>
+	<table border = "0" align = "center">
+<!-- Input values for table rows and columns -->
+		<tr>
+			<td><b>How many rows?</b></td>
+			<td><input type = "text" name = "rows" size = "3" /></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><b>How many columns?</b></td>
+			<td><input type = "text" name = "columns" size = "3" /></td>
+		</tr>
+	</table>
+<!-- The submit and reset buttons -->
+	<p align = "center">
+		<br /><br /><br />
+		<input type = "submit" value = "Submit Table" />
+		<input type = "reset" value = "Reset" />
+	</p>
+</form>
+</body>
+</html>
