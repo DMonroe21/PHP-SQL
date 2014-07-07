@@ -1,0 +1,31 @@
+ <!--ptable.php - Processes the form used to create a table in ptable.html-->
+
+<html>
+  
+<head>
+	<title>DeAndrea Monroe</title>
+</head>
+
+<body>
+	<table border = "1" align = "center">
+	<?php
+//Get table values from input.
+
+	$rows = $_GET["rows"];
+	$columns = $_GET["columns"];
+	
+//Loop that creates the table.
+	for ($i=1; $i < $rows; $i++)
+	{
+		echo "<tr>";
+		for ($j=1; $j < $columns; $j++)
+		{
+			echo "<td>" R.$rows,C.$columns "</td>";
+		}
+		echo "</tr>";
+	}
+	
+	?>
+	</table>
+</body>
+</html>
